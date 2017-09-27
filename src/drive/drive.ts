@@ -89,6 +89,20 @@ const COLLECTIONS_DIRECTORY_RESOURCE: FileResource = {
   name: '',
 }
 
+/**
+ * Clears cached file resources. This is necessary when the user
+ * logs out of one account and into another.
+ *
+ * #### Notes
+ * This kind of defeats the purpose of having the resource cache
+ * in a private namespace. That being said, it is the simplest solution
+ * to the problem, so...
+ */
+export
+function clearResourceCache() {
+  Private.resourceCache.clear();
+}
+
 
 /* ****** Functions for uploading/downloading files ******** */
 

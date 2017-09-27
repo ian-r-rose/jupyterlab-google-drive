@@ -30,6 +30,10 @@ import {
 } from '@jupyterlab/filebrowser';
 
 import {
+  clearResourceCache
+} from './drive';
+
+import {
   gapiAuthorized, initializeGapi,
   signIn, signOut, getCurrentUserProfile
 } from '../gapi';
@@ -159,9 +163,9 @@ class GoogleDriveFileBrowser extends Widget {
 
     // Swap out the file browser for the login screen.
     this._browser.parent = null;
-    (this.layout as PanelLayout).addWidget(this._loginScreen);
-    this._browser.dispose();
     this._logoutButton.dispose();
+    (this.layout as PanelLayout).addWidget(this._loginScreen);
+    clearResourceCache();
 
     // Sign out.
     signOut().then(() => {
